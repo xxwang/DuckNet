@@ -59,6 +59,10 @@ public class WorkItem {
 public extension WorkItem {
     /// 准备请求
     func prepare() {
+        // 构建URLRequest
+        self.urlRequest = URLRequestBuilder(self.action).urlRequest()
+
+        // 发送前回调
         if let block = self.handler.prepareBlock {
             self.urlRequest = block(self.urlRequest)
         }
@@ -67,7 +71,10 @@ public extension WorkItem {
         case .request:
             self.task = self.session.dataTask(with: self.urlRequest)
         case .upload:
-            self.task = self.session.uploadTask(with: self.urlRequest, from: Data())
+            if let data = self.urlRequest.httpBody {
+                self.urlRequest.httpBody = nil
+                self.task = self.session.uploadTask(with: self.urlRequest, from: data)
+            }
         case .download:
             self.task = self.session.downloadTask(with: self.urlRequest)
         }

@@ -24,4 +24,3 @@ class DNHandler: NSObject, @unchecked Sendable {
 }
 
 extension DNHandler: URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {}
-

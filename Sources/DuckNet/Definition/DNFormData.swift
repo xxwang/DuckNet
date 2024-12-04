@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DNFormData: Hashable {
+public struct DNFormDataItem: Hashable {
     /// 要上传的数据
     public let data: Data
     /// 文件名

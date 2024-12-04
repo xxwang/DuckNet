@@ -11,9 +11,9 @@ public enum EncodeType {
 // MARK: - DNTask
 public enum DNTask {
     /// 普通请求方法
-    case request(parameters: [String: Any] = [:], encoding: EncodeType = .JSON)
+    case request(parameters: [String: Any] = [:], encoder: DNEncoder = DNJSONEncoder.default)
     /// 上传请求方法
-    case upload(formDatas: [DNFormData], parameters: [String: Any] = [:])
+    case upload(formDatas: [DNFormDataItem], parameters: [String: Any] = [:], encoder: DNEncoder = DNUploadEncoder.default)
     /// 下载请求方法
-    case download(parameters: [String: Any] = [:], encoding: EncodeType = .URL, destination: Any)
+    case download(parameters: [String: Any] = [:], encoder: DNEncoder = DNURLEncoder.default, destination: Any)
 }
